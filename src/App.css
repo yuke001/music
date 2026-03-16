@@ -5,7 +5,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* Changed from height:100vh to min-height so it scrolls nicely on small screens */
+  min-height: 100vh; 
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .player-container {
@@ -17,25 +20,56 @@ body {
 
 .player-card {
   background: #ffffff;
-  padding: 40px;
+  padding: 30px;
   border-radius: 20px;
   text-align: center;
-  width: 320px;
+  width: 100%;
+  max-width: 380px; /* Made slightly wider for the list */
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
 }
 
-.player-card:hover {
-  transform: translateY(-5px);
-}
-
 .player-card h1 {
-  margin-bottom: 10px;
+  margin-top: 0;
+  margin-bottom: 5px;
   color: #333;
+  font-size: 24px;
 }
 
 .song-title {
-  color: #666;
+  color: #e91e63;
+  margin-bottom: 25px;
+  font-size: 18px;
+}
+
+/* --- Progress Bar --- */
+.progress-container {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.progress-bar {
+  width: 100%;
+  appearance: none;
+  background: #e0e0e0;
+  height: 6px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.progress-bar::-webkit-slider-thumb {
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #e91e63;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(233, 30, 99, 0.5);
+}
+
+/* --- Controls --- */
+.controls {
   margin-bottom: 25px;
 }
 
@@ -57,9 +91,104 @@ body {
 }
 
 .play-btn {
-  background: #e91e63;
+  background: #e91e63 !important;
+  width: 110px;
 }
 
 .play-btn:hover {
-  background: #ff2e7a;
+  background: #ff2e7a !important;
+}
+
+/* --- Playlist Section --- */
+.playlist {
+  text-align: left;
+  border-top: 2px solid #f0f0f0;
+  padding-top: 15px;
+}
+
+.playlist h3 {
+  margin: 0 0 15px 0;
+  color: #555;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.playlist ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 250px; /* Forces list to be scrollable */
+  overflow-y: auto;
+  border-radius: 8px;
+}
+
+/* Custom scrollbar to make it look clean */
+.playlist ul::-webkit-scrollbar {
+  width: 6px;
+}
+.playlist ul::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px;
+}
+.playlist ul::-webkit-scrollbar-thumb {
+  background: #c1c1c1; 
+  border-radius: 10px;
+}
+.playlist ul::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8; 
+}
+
+.playlist-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  margin-bottom: 5px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.playlist-item:hover {
+  background: #ececec;
+}
+
+/* Highlighting the active song */
+.playlist-item.active {
+  background: #2c2c54;
+  color: white;
+}
+
+.playlist-item.active .song-number {
+  color: #a2a2d0;
+}
+
+.song-info {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.song-number {
+  color: #888;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.song-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.playing-icon {
+  font-size: 14px;
+  animation: pulse 1s infinite alternate;
+}
+
+/* A tiny bounce animation for the music note */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.2); }
 }
